@@ -2,8 +2,8 @@ import Lexer from "./Lexer";
 import Parser from "./Parser";
 
 it("should parse tokens right", () => {
-  const tokens = Lexer("1/2+3*4-6%4*(1+9)");
-  console.log(JSON.stringify(Parser(tokens), null, 2));
-  // const tokens = Lexer("1+2+3");
-  // console.log(Parser(tokens));
+  const tokens1 = Lexer("0?1:2?3:4");
+  console.log(JSON.stringify(Parser(tokens1), null, 2));
+  const tokens2 = Lexer("0?1?2:3:4");
+  console.log(JSON.stringify(Parser(tokens2), null, 2));
 });

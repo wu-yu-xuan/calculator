@@ -65,6 +65,12 @@ export default function Lexer(input: string): Token[] {
       case "%":
         advance();
         return { type: TokenType.mod };
+      case "?":
+        advance();
+        return { type: TokenType.interrogation };
+      case ":":
+        advance();
+        return { type: TokenType.colon };
       default:
         throw new Error(
           `unexpected token in position ${position}: ${currentChar}, expected +-*/() or number`

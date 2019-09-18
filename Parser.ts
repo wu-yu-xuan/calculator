@@ -2,6 +2,7 @@ import { Token, TokenType, Node } from "./interface";
 import UnaryNode from "./UnaryNode";
 import NumberNode from "./NumberNode";
 import BinaryNode from "./BinaryNode";
+import TrinocularNode from "./TrinocularNode";
 
 /**
  * 将 tokens 转化为抽象语法树
@@ -31,7 +32,7 @@ export default function Parser(tokens: Token[]) {
   function precedence20(): Node {
     if (currentToken.type === TokenType.leftParen) {
       eatToken(TokenType.leftParen);
-      const node = precedence13();
+      const node = precedence4();
       eatToken(TokenType.rightParen);
       return node;
     } else if (currentToken.type === TokenType.number) {
@@ -100,5 +101,23 @@ export default function Parser(tokens: Token[]) {
     return node;
   }
 
-  return precedence13();
+  /**
+   * 优先级4: 三目运算符
+   */
+  function precedence4(): Node {
+    const node = precedence13();
+    if (
+      position < tokens.length &&
+      currentToken.type === TokenType.interrogation
+    ) {
+      eatToken(TokenType.interrogation);
+      const expression1 = precedence4();
+      eatToken(TokenType.colon);
+      const expression2 = precedence4();
+      return new TrinocularNode(node, expression1, expression2);
+    }
+    return node;
+  }
+
+  return precedence4();
 }

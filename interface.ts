@@ -7,6 +7,8 @@ export enum TokenType {
   mod,
   bitwiseNot,
   logicalNot,
+  interrogation,
+  colon,
   leftParen,
   rightParen
 }
