@@ -7,8 +7,17 @@ export enum TokenType {
   mod,
   bitwiseNot,
   logicalNot,
+
+  /**
+   * 问号
+   */
   interrogation,
   colon,
+
+  /**
+   * 幂
+   */
+  exponentiation,
   leftParen,
   rightParen
 }

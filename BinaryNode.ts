@@ -23,6 +23,8 @@ export default class BinaryNode implements Node {
         return left / right;
       case TokenType.mod:
         return left % right;
+      case TokenType.exponentiation:
+        return left ** right;
       default:
         throw new Error(
           `unexpected operation ${this.operation}, expected +-*/`

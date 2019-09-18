@@ -67,11 +67,23 @@ export default function Parser(tokens: Token[]) {
     }
   }
 
+  function precedence15(): Node {
+    const left = precedence16();
+    if (
+      position < tokens.length &&
+      currentToken.type === TokenType.exponentiation
+    ) {
+      eatToken(TokenType.exponentiation);
+      return new BinaryNode(left, TokenType.exponentiation, precedence15());
+    }
+    return left;
+  }
+
   /**
    * 优先级14: 乘法, 除法, 取模
    */
   function precedence14(): Node {
-    let node = precedence16();
+    let node = precedence15();
     let type;
     const binaryTypes = [TokenType.mul, TokenType.div, TokenType.mod];
     while (
@@ -79,7 +91,7 @@ export default function Parser(tokens: Token[]) {
       (type = binaryTypes.find(v => v === currentToken.type))
     ) {
       eatToken(type);
-      node = new BinaryNode(node, type, precedence16());
+      node = new BinaryNode(node, type, precedence15());
     }
     return node;
   }

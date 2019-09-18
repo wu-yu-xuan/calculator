@@ -58,6 +58,10 @@ export default function Lexer(input: string): Token[] {
         return { type: TokenType.rightParen };
       case "*":
         advance();
+        if (currentChar === "*") {
+          advance();
+          return { type: TokenType.exponentiation };
+        }
         return { type: TokenType.mul };
       case "/":
         advance();

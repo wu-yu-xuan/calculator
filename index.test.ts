@@ -10,7 +10,8 @@ it("should calc expression right", () => {
     "1+9*3/7%(1+6)",
     "5 - - - + - (3 + 4) - +2",
     "0?1:2?3:4",
-    "0?1?2:3:4"
+    "0?1?2:3:4",
+    "2**2**3"
   ];
   for (const expression of expressions) {
     calc(expression);
