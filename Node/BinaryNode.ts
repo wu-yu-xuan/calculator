@@ -1,4 +1,5 @@
-import { TokenType, Node } from "./interface";
+import { TokenType, Node } from '../interface';
+import Context from '../Context';
 
 /**
  * 二元运算结点
@@ -9,9 +10,9 @@ export default class BinaryNode implements Node {
     private operation: TokenType,
     private right: Node
   ) {}
-  visit() {
-    const left = this.left.visit();
-    const right = this.right.visit();
+  visit(context: Context) {
+    const left = this.left.visit(context);
+    const right = this.right.visit(context);
     switch (this.operation) {
       case TokenType.plus:
         return left + right;

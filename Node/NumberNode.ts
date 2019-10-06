@@ -1,4 +1,4 @@
-import { Node } from "./interface";
+import { Node } from "../interface";
 
 /**
  * 数字结点

@@ -1,3 +1,5 @@
+import Context from './Context';
+
 export enum TokenType {
   number,
   plus,
@@ -28,5 +30,15 @@ export interface Token {
 }
 
 export interface Node {
-  visit(): number;
+  visit(context: Context): any;
+}
+
+export interface Variable {
+  get(): any;
+  set(newValue: any): void;
+}
+
+export enum DeclarationType {
+  let,
+  const
 }
